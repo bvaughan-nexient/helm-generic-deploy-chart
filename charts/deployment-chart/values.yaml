@@ -6,30 +6,52 @@ configMap:
   # -- optional: map of objects to be added to the configmap
   data: {}
 serviceAccount:
+  # -- optional: create a service account with the given name or not, default is false
   create: true
+  # -- optional: annotations to add to the serviceAccount
   annotations: {}
+  # -- optional: name of the service account, default is .Values.name
   name: ""
+# -- optional: annoations to add to the pod deployment
 podAnnotations: {}
+# -- optional: labels to add to the pod deployment
 podLabels: {}
 deployment:
+  # -- optional field that specifies the minimum number of seconds for which a newly created Pod should be ready without any of its containers crashing, for it to be considered available
   minReadySeconds: 0
+  # -- number of replicas to create, overriden if autoscaling is enabled
   replicaCount: 1
+  # -- add label to inject linkerd sidecar
   injectLinkerd: true
+  # -- name of secret to use for pulling images from private registry
   imagePullSecret: ""
+  # -- map of labels to use to select nodes to schedule pods onto
   nodeSelector: {}
+  # -- list of tolerations to apply to the deployment
   tolerations: []
+  # -- map of labels to add to the deployment to determine node affinity
   affinity: {}
+  # -- map of attributes to add to the deployment podSecurityContext
   podSecurityContext: {}
+  # -- map of volumes to add to the deployment
   volumes: {}
           
 container:
+  # -- command to run in the container
   command: ""
+  # -- arguments to pass to the command
   args: ""
+  # -- container image to use
   image: ""
+  # -- name of the container, default is .Values.name
   name: ""
+  # -- pullPolicy for the pod
   pullPolicy: IfNotPresent
+  # -- list of environment variables to add to the container
   env: []
+  # -- map of attributes to add to the container securityContext
   securityContext: {}
+  # -- map of attributes to add for container limits and requests
   resources: {}
     # limits:
     #   cpu: 100m
@@ -37,9 +59,12 @@ container:
     # requests:
     #   cpu: 100m
     #   memory: 128Mi
+  # -- map of objects of volumes to mount into the container
   volumeMounts: {}
 service:
+  # -- type of service to create
   type: ClusterIP
+  # -- name of the service to create, default is .Values.name
   name: test-chart-service
   # -- map of objects to be created as a service. First service defined will be used for ingress.
   ports:
@@ -48,17 +73,27 @@ service:
       targetPort: http
 
 ingress:
+  # -- to create the ingress or not
   enabled: false
+  # -- name of the ingressClass to use
   className: ""
+  # -- map of annotations to add to the ingress
   annotations: {}
+  # -- map of hosts to be configured for the ingress
   hosts: {}
+  # -- tls configuration for the ingress
   tls: []
 
 autoscaling:
+  # -- to create the autoscaler or not
   enabled: true
   # -- optional: name of the autoscaler, default is .Values.name
   name: ""
+  # -- minimum replicas for the autoscaler
   minReplicas: 1
+  # -- maximum replicas for the autoscaler
   maxReplicas: 10
+  # -- target CPU utilization percentage for the autoscaler
   targetCPUUtilizationPercentage: 80
+  # -- target memory utilization percentage for the autoscaler
   targetMemoryUtilizationPercentage: 80
