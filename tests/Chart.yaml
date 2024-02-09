@@ -7,4 +7,4 @@ appVersion: "0.0.1"
 dependencies:
   - name: deployment-chart
     version: ~0.0.1
-    repository: file://../chart
+    repository: file://../charts/deployment-chart
