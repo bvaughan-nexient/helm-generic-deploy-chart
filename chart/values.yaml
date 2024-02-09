@@ -1,0 +1,64 @@
+# -- required: name of the chart
+name: chart # required
+configMap:
+  # -- optional: create a configmap with the given name, default is .Values.name
+  name: ""
+  # -- optional: map of objects to be added to the configmap
+  data: {}
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+podAnnotations: {}
+podLabels: {}
+deployment:
+  minReadySeconds: 0
+  replicaCount: 1
+  injectLinkerd: true
+  imagePullSecret: ""
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podSecurityContext: {}
+  volumes: {}
+          
+container:
+  command: ""
+  args: ""
+  image: ""
+  name: ""
+  pullPolicy: IfNotPresent
+  env: []
+  securityContext: {}
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+  volumeMounts: {}
+service:
+  type: ClusterIP
+  name: test-chart-service
+  # -- map of objects to be created as a service. First service defined will be used for ingress.
+  ports:
+    - name: http # first defined port will be used for service definition
+      port: 80
+      targetPort: http
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts: {}
+  tls: []
+
+autoscaling:
+  enabled: true
+  # -- optional: name of the autoscaler, default is .Values.name
+  name: ""
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80

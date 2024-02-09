@@ -1,0 +1,10 @@
+apiVersion: v2
+name: umbrella-chart
+description: Consumes the deployment-chart and creates a generic deployment
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
+dependencies:
+  - name: deployment-chart
+    version: ^0.0.1
+    repository: file://../chart
