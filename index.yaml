@@ -1,0 +1,33 @@
+apiVersion: v1
+entries:
+  deployment-chart:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2024-02-09T16:33:32.834526453Z"
+    dependencies:
+    - name: helm-library
+      repository: https://bvaughan-nexient.github.io/helm-library
+      version: ^2.0.0
+    description: A generic deployment Helm chart for Kubernetes
+    digest: 93f13cae0149e1099cd78ecf45a27dd1b1e198e59698b6ebca2882953a311f37
+    name: deployment-chart
+    type: application
+    urls:
+    - https://github.com/bvaughan-nexient/helm-generic-deployment-chart/releases/download/deployment-chart-0.0.1/deployment-chart-0.0.1.tgz
+    version: 0.0.1
+  umbrella-chart:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2024-02-09T16:33:32.95129016Z"
+    dependencies:
+    - name: deployment-chart
+      repository: file://../chart
+      version: ^0.0.1
+    description: Consumes the deployment-chart and creates a generic deployment
+    digest: 4a944fc417f705c0920c965091d9c6ebafa0e2e71eaf02d6f0d50346076fde66
+    name: umbrella-chart
+    type: application
+    urls:
+    - https://github.com/bvaughan-nexient/helm-generic-deployment-chart/releases/download/umbrella-chart-0.0.1/umbrella-chart-0.0.1.tgz
+    version: 0.0.1
+generated: "2024-02-09T16:33:32.951300359Z"
